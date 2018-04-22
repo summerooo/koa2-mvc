@@ -7,10 +7,11 @@
   <title>ljl</title>
 </head>
 <body>
+
 </body>
 </html>
 <script>
-  fetch('http://localhost:3000/bb/gg', {
+  fetch('http://localhost:3000/bb/pp', {
     method: 'POST',
     headers: {
       'Cache-Control': 'no-cache',
@@ -22,6 +23,7 @@
     console.log(r)
     return r.json()
   }).then((data)=>{
+    alert(data)
     console.log(data)
   }).catch()
 //   $(document).ready(function() {

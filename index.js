@@ -21,7 +21,7 @@ app.use(cors({
   maxAge: 5,
   credentials: true,
   allowMethods: ['GET', 'POST', 'DELETE'],
-  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control']
 }))
 app.use(staticServer(path.join(__dirname)))
 // app.use(relativeRouter(__dirname)) = .use(router.routes())
