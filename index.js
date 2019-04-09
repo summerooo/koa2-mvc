@@ -9,7 +9,9 @@ const relativeRouter = require('./config/router')
 
 const app = new Koa()
 const router = Router()
+// http请求解析
 app.use(bodyParser())
+// 设置允许的跨域访问
 app.use(cors({
   origin: function (ctx) {
       if (ctx.url === '/test') {
@@ -23,10 +25,12 @@ app.use(cors({
   allowMethods: ['GET', 'POST', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control']
 }))
+// 设置服务目录
 app.use(staticServer(path.join(__dirname)))
-// app.use(relativeRouter(__dirname)) = .use(router.routes())
-app.use(relativeRouter(__dirname))
+// 自动匹配status
 app.use(router.allowedMethods())
+// 设置接口
+app.use(relativeRouter(__dirname))
 // router.post('/', async (ctx, next) => {
 //   console.log(ctx)
 //   ctx.body = await Promise.resolve(questions)

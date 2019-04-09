@@ -25,6 +25,8 @@
         "koa-socket": "^4.4.0",
         "koa-static": "^4.0.2",
         "koa2-cors": "^2.0.5",
+        "mongodb": "^3.0.7",
+        "mongoose": "^5.0.15",
         "socket.io": "^2.0.4"
     }
 }

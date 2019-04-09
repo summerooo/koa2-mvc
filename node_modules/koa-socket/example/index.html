@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Koa-Socket Example</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: -apple-system, '.SFNSDisplay-Regular', 'Helvetica Neue', 'Arial', sans-serif;
+      color: #32322C;
+    }
+
+    button {
+      display: block;
+      margin-top: .5em;
+      border: none;
+      border-radius: 4px;
+      font-size: 18px;
+      font-weight: 600;
+      text-align: center;
+      padding: .3em 3em;
+      background: #13C4A3;
+      transition: all .177s linear;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #36F1CD;
+      text-shadow: 0px 1px 2px rgba( 0, 0, 0, .3 );
+    }
+    .small {
+      font-size: 70%;
+    }
+
+    .connections {
+      position: absolute;
+      width: 44px;
+      height: 44px;
+      top: 20px;
+      right: 20px;
+      line-height: 44px;
+      font-size: 16px;
+      font-weight: 700;
+      background: rgba( 0, 0, 0, .45 );
+      color: white;
+      border-radius: 4px;
+    }
+    .connections span {
+      display: block;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <button class="js-btn">Send</button>
+  <button class="js-ack">Send <span class="small">(with acknowledgement)</span></button>
+  <button class="js-chatBtn">Chat</button>
+  <div class="connections"><span class="js-connect">1</span></div>
+  <script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
+  <script>
+    var socket = io()
+
+    var btn = document.querySelector( '.js-btn' )
+    btn.addEventListener( 'click', function( event ) {
+      socket.emit( 'data', {
+        foo: 'foo'
+      })
+    })
+
+    var ack = document.querySelector( '.js-ack' )
+    ack.addEventListener( 'click', function( event ) {
+      socket.emit( 'ack', {
+        foo: 'foo'
+      }, res => {
+        console.log( 'acknowledgement:', res )
+      })
+    })
+
+    var connections = document.querySelector( '.js-connect' )
+    socket.on( 'connections', function( event ) {
+      console.log( 'connected', event )
+      connections.innerHTML = event.numConnections
+    })
+
+    socket.on( 'response', function( event ) {
+      console.log( 'response:', event.message )
+    })
+
+    var chat = io( 'http://localhost:3000/chat' )
+    chat.on( 'message', function( event ) {
+      console.log( 'chat message:', event )
+    })
+    var chatBtn = document.querySelector( '.js-chatBtn' )
+    chatBtn.addEventListener( 'click', function( event ) {
+      chat.emit( 'message', 'yo central, are you on the line?' )
+    })
+  </script>
+</body>
+</html>

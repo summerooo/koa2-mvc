@@ -26,6 +26,5 @@ module.exports = (dir) => {
         console.log(x + '并没有post')
       }
     })
-    
     return router.routes()
   }
