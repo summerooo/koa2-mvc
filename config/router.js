@@ -14,17 +14,15 @@ module.exports = (dir) => {
           let path = '/' + x.substr(0, x.length - 3) + '/' + g
           router.get(path, mapping.get[g])
         }
-      } else {
-        console.log(x + '并没有GET')
-      }
+      } else console.log(x + '并没有GET')
       if ('post' in mapping) {
         for (let p in mapping.post) {
+          console.log(p, 'pppp', mapping.config)
           let path = '/' + x.substr(0, x.length - 3) + '/' + p
-          router.post(path, mapping.post[p])
+          if (mapping.config && mapping.config[p]) router.post(path, mapping.config[p], mapping.post[p])
+          else router.post(path, mapping.post[p])
         }
-      } else {
-        console.log(x + '并没有post')
-      }
+      } else console.log(x + '并没有post')
     })
     return router.routes()
   }

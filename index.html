@@ -7,10 +7,33 @@
   <title>ljl</title>
 </head>
 <body>
-
-</body>
+    <input type="file" name="upfile" id="upfile" value="" />
+    <input type="button" value="上传" id="btn" />
+  </body>
 </html>
 <script>
+  $('#btn').click(function() {
+    var formData = new FormData()
+    formData.append('file', document.getElementById('upfile').files[0])
+
+    fetch('http://localhost:3000/upload/saveFile', {
+      method: 'POST',
+      headers: {
+        // 'Cache-Control': 'no-cache',
+        // 'Content-Type': 'text/plain',
+        // 'processData': false,
+        // 'Content-Type': 'multipart/form-data'
+      },
+      body: formData,
+      // GET 不加参数 只有POST
+      // body: 'data =' + JSON.stringify({ username: '牛', password: '没' })
+    }).then(r => {
+      console.log(r)
+      return r.json()
+    }).then(data => {
+      console.log(data)
+    }).catch()
+  })
   fetch('http://localhost:3000/bb/pp', {
     method: 'POST',
     headers: {
@@ -18,27 +41,12 @@
       'Content-Type': 'text/plain'
     },
     // GET 不加参数 只有POST
-    body: 'data =' + JSON.stringify({ username: '牛', password: '没'})
+    body: 'data =' + JSON.stringify({ username: '牛会娟是山驴皮', password: '没错是滴'})
   }).then((r)=>{
     console.log(r)
     return r.json()
   }).then((data)=>{
     console.log(data)
   }).catch()
-//   $(document).ready(function() {
-//     $.ajax({
-//         type:'post',
-//         url:'http://localhost:3000/g',
-//         data: {
-//             name: 'hanmeimei',
-//             age: 18
-//         },
-//         success:function(data){
-//             console.log(data);
-//         },
-//         error:function(){
-//             console.log('error');
-//         }
-//     })
-// })
+
 </script>

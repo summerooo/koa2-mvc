@@ -23,7 +23,7 @@ app.use(cors({
   maxAge: 5,
   credentials: true,
   allowMethods: ['GET', 'POST', 'DELETE'],
-  allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control']
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control', 'multipart/form-data']
 }))
 // 设置服务目录
 app.use(staticServer(path.join(__dirname)))
