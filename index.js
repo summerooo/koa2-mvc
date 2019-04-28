@@ -1,11 +1,11 @@
 const Koa = require('koa')
-var bodyParser = require('koa-bodyparser')
+const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
-var staticServer = require('koa-static')
+const staticServer = require('koa-static')
 const Router = require('koa-router')
-var path = require('path')
-var fs = require('fs')
+const path = require('path')
 const relativeRouter = require('./config/router')
+let {url, port} = require('./dev')
 
 const app = new Koa()
 const router = Router()
@@ -14,10 +14,10 @@ app.use(bodyParser())
 // 设置允许的跨域访问
 app.use(cors({
   origin: function (ctx) {
-      if (ctx.url === '/test') {
-          return '*'
-      }
-      return 'http://localhost:9527'
+    if (ctx.url === '/test') {
+        return '*'
+    }
+    return 'http://localhost:9527'
   },
   exposeHeaders: ['WWW-Authenticate', 'Server-Authorization'],
   maxAge: 5,
@@ -31,15 +31,5 @@ app.use(staticServer(path.join(__dirname)))
 app.use(router.allowedMethods())
 // 设置接口
 app.use(relativeRouter(__dirname))
-// router.post('/', async (ctx, next) => {
-//   console.log(ctx)
-//   ctx.body = await Promise.resolve(questions)
-// })
-// // var hash, keylist
-// router.post('/g', async (ctx, next) => {
-//   console.log(ctx.query)
-//   console.log(ctx.request.body)
-//   ctx.body = await Promise.resolve(questions)
-// })
 
-app.listen(1116, '127.0.0.1')
+app.listen(port, url)

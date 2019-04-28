@@ -16,7 +16,7 @@
     var formData = new FormData()
     formData.append('file', document.getElementById('upfile').files[0])
 
-    fetch('http://localhost:3000/upload/saveFile', {
+    fetch('http://127.0.0.1:1116/upload/saveFile', {
       method: 'POST',
       headers: {
         // 'Cache-Control': 'no-cache',
@@ -34,7 +34,7 @@
       console.log(data)
     }).catch()
   })
-  fetch('http://localhost:3000/bb/pp', {
+  fetch('http://127.0.0.1:1116/bb/pp', {
     method: 'POST',
     headers: {
       'Cache-Control': 'no-cache',
