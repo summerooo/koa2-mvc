@@ -5,7 +5,7 @@ const staticServer = require('koa-static')
 const Router = require('koa-router')
 const path = require('path')
 const relativeRouter = require('./config/router')
-let {url, port} = require('./dev')
+let { url, port } = require('./dev')
 
 const app = new Koa()
 const router = Router()
