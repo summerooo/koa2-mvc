@@ -17,17 +17,17 @@
         "url": "https://github.com/michaelliao/learn-javascript.git"
     },
     "dependencies": {
-        "eslint": "^4.14.0",
-        "keygrip": "^1.0.2",
-        "koa": "^2.0.0",
-        "koa-bodyparser": "^4.2.0",
+        "eslint": "^5.16.0",
+        "keygrip": "^1.0.3",
+        "koa": "^2.7.0",
+        "koa-bodyparser": "^4.2.1",
         "koa-multer": "^1.0.2",
-        "koa-router": "^7.0.0",
+        "koa-router": "^7.4.0",
         "koa-socket": "^4.4.0",
-        "koa-static": "^4.0.2",
-        "koa2-cors": "^2.0.5",
-        "mongodb": "^3.0.7",
-        "mongoose": "^5.0.15",
-        "socket.io": "^2.0.4"
+        "koa-static": "^5.0.0",
+        "koa2-cors": "^2.0.6",
+        "mongodb": "^3.2.3",
+        "mongoose": "^5.5.4",
+        "socket.io": "^2.2.0"
     }
 }
