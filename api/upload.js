@@ -19,7 +19,15 @@ module.exports = {
   },
   post: {
     async saveFile(ctx, next) {
-      ctx.body = { filename: ctx.req.file.filename, url: `http://localhost:3000/${ctx.req.file.path}` }
+      let IPv4, arr, os = require('os')
+      if (os.networkInterfaces().en0) arr = os.networkInterfaces().en0
+      else arr = os.networkInterfaces().eth0
+      for(var i=0; i<arr.length; i++){
+        if(arr[i].family=='IPv4'){
+          IPv4 = arr[i].address
+        }
+      }
+      ctx.body = { filename: ctx.req.file.filename, url: `http://${IPv4}/${ctx.req.file.path}` }
     }
   }
 }
