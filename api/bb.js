@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   get: {
     async gg (ctx, next) {
       ctx.body = {'blackblackblackblackblack': ctx.query, 'b': ctx.request.body}

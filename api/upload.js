@@ -1,8 +1,8 @@
-const multer = require('koa-multer') //加载koa-multer模块
+import multer from 'koa-multer' //加载koa-multer模块
 //文件上传
 const dirPath = 'public/uploads/'
-const fs = require('fs')
-let { url } = require('../dev')
+import fs from 'fs'
+import { url } from '../dev.js'
 
 const init = () => {
   /*
@@ -39,7 +39,7 @@ let storage = multer.diskStorage({
   }
 })
 let upload = multer({ storage: storage })
-module.exports = {
+export default {
   config: {
     saveFile: upload.single('file')
   },

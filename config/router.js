@@ -1,14 +1,13 @@
-const fs = require('fs')
-const Path = require('path')
-const Router = require('koa-router')
-
+import fs from 'fs'
+import Path from 'path'
+import Router from 'koa-router'
 const router = Router()
-module.exports = dir => {
-  const relativePath = dir || Path.resolve(__dirname, '..')
+
+export default relativePath => {
   const files = fs.readdirSync(relativePath + '/api')
   const jsFiles = files.filter( f => f.endsWith('.js'))
-  jsFiles.map(file => {
-    let mapping = require(relativePath + '/api/' + file)
+  jsFiles.map(async file => {
+    let mapping = (await import(relativePath + '/api/' + file)).default
     for (let way in mapping) {
       if (way !== 'config') {
         for (let method in mapping[way]) {

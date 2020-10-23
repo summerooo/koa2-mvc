@@ -1,11 +1,11 @@
-const Koa = require('koa')
-const bodyParser = require('koa-bodyparser')
-const cors = require('koa2-cors')
-const staticServer = require('koa-static')
-const Router = require('koa-router')
-const path = require('path')
-const relativeRouter = require('./config/router')
-let { url, port } = require('./dev')
+import Koa from 'koa'
+import bodyParser from 'koa-bodyparser'
+import cors from 'koa2-cors'
+import staticServer from 'koa-static'
+import Router from 'koa-router'
+import { resolve } from 'path'
+import relativeRouter from './config/router.js'
+import { url, port } from './dev.js'
 
 const app = new Koa()
 const router = Router()
@@ -25,11 +25,12 @@ app.use(cors({
   allowMethods: ['GET', 'POST', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control', 'multipart/form-data']
 }))
+const relativePath = resolve('./')
 // 设置服务目录
-app.use(staticServer(path.join(__dirname)))
+app.use(staticServer(relativePath))
 // 自动匹配status
 app.use(router.allowedMethods())
 // 设置接口
-app.use(relativeRouter(__dirname))
+app.use(relativeRouter(relativePath))
 
 app.listen(port, url)
