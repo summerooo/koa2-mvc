@@ -1,4 +1,4 @@
-const Koa = require('koa')
+const Koa = require('koa2')
 const bodyParser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const staticServer = require('koa-static')
