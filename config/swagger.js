@@ -1,5 +1,6 @@
 const router = require('koa-router')() //引入路由函数
 const swaggerJSDoc = require('swagger-jsdoc')
+const path = require('path')
 
 const options = {
   swaggerDefinition: {
