@@ -9,6 +9,8 @@ let { url, port } = require('./dev')
 
 const app = new Koa()
 const router = Router()
+
+
 // http请求解析
 app.use(bodyParser())
 // 设置允许的跨域访问
@@ -25,11 +27,32 @@ app.use(cors({
   allowMethods: ['GET', 'POST', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept', 'Cache-Control', 'multipart/form-data']
 }))
+
+// swagger
+const koaSwagger = require('koa2-swagger-ui').koaSwagger
+const swagger = require('./config/swagger')
+app.use(swagger.routes(), swagger.allowedMethods())
+// 配置Swagger-ui
+app.use(koaSwagger({
+  routePrefix: '/swagger',
+  swaggerOptions: {
+    url: '/swagger.json',
+  },
+}))
+
 // 设置服务目录
 app.use(staticServer(path.join(__dirname)))
 // 自动匹配status
 app.use(router.allowedMethods())
 // 设置接口
 app.use(relativeRouter(__dirname))
+
+// logger
+app.use(async (ctx, next) => {
+  const start = new Date()
+  await next()
+  const ms = new Date() - start
+  console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+})
 
 app.listen(port, url)

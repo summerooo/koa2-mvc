@@ -35,7 +35,8 @@ let storage = multer.diskStorage({
   //修改文件名称
   filename: function(req, file, cb) {
     let fileFormat = file.originalname.split('.')
-    cb(null, Date.now() + '.' + fileFormat[fileFormat.length - 1])
+    // cb(null, Date.now() + '.' + fileFormat[fileFormat.length - 1])
+    cb(null, file.originalname)
   }
 })
 let upload = multer({ storage: storage })
