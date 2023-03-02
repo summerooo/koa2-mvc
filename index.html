@@ -1,0 +1,52 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <title>ljl</title>
+</head>
+<body>
+    <input type="file" name="upfile" id="upfile" value="" />
+    <input type="button" value="上传" id="btn" />
+  </body>
+</html>
+<script>
+  $('#btn').click(function() {
+    var formData = new FormData()
+    formData.append('file', document.getElementById('upfile').files[0])
+
+    fetch('http://101.43.136.9:1116/upload/saveFile', {
+      method: 'POST',
+      headers: {
+        // 'Cache-Control': 'no-cache',
+        // 'Content-Type': 'text/plain',
+        // 'processData': false,
+        // 'Content-Type': 'multipart/form-data'
+      },
+      body: formData,
+      // GET 不加参数 只有POST
+      // body: 'data =' + JSON.stringify({ username: '111', password: '222' })
+    }).then(r => {
+      console.log(r)
+      return r.json()
+    }).then(data => {
+      console.log(data)
+    }).catch()
+  })
+  fetch('http://101.43.136.9:1116/bb/pp', {
+    method: 'POST',
+    headers: {
+      'Cache-Control': 'no-cache',
+      'Content-Type': 'text/plain'
+    },
+    // GET 不加参数 只有POST
+    body: 'data =' + JSON.stringify({ username: '111', password: '222'})
+  }).then((r)=>{
+    console.log(r)
+    return r.json()
+  }).then((data)=>{
+    console.log(data)
+  }).catch()
+
+</script>
