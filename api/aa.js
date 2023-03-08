@@ -28,7 +28,7 @@ module.exports = {
        *         description: 登入成功
        *         schema:
        *           type: object
-       *           $ref: '#/definitions/Login'
+       *           $ref: '/aa/black'
        *   
        */
 
@@ -65,7 +65,11 @@ module.exports = {
    *         description: 登入成功
    *         schema:
    *           type: object
+<<<<<<< HEAD
    *           $ref: '#/definitions/Login'
+=======
+   *           $ref: '/aa/red'
+>>>>>>> develop
    *   
    */
       ctx.body = {'redredredredredredred': ctx.query, 'b' : ctx.request.body}

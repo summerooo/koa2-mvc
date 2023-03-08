@@ -1,6 +1,6 @@
-const Koa = require('koa2')
+const Koa = require('koa')
 const bodyParser = require('koa-bodyparser')
-const cors = require('koa2-cors')
+const cors = require('@koa/cors')
 const staticServer = require('koa-static')
 const Router = require('koa-router')
 const path = require('path')
@@ -55,4 +55,8 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+<<<<<<< HEAD
+=======
+console.log(`http://${url}:${port}`)
+>>>>>>> develop
 app.listen(port, url)
