@@ -55,8 +55,5 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
-<<<<<<< HEAD
-=======
 console.log(`http://${url}:${port}`)
->>>>>>> develop
 app.listen(port, url)
